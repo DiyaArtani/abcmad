@@ -2337,3 +2337,50 @@ class _ListBoxScreenState extends State<ListBoxScreen> {
     );
   }
 }
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  double _width = 100;
+  double _height = 100;
+  Color _color = Colors.blue;
+
+  void _changeBox() {
+    setState(() {
+      _width = _width == 100 ? 200 : 100;
+      _height = _height == 100 ? 200 : 100;
+      _color = _color == Colors.blue ? Colors.red : Colors.blue;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Implicit Animation')),
+        body: Center(
+          child: AnimatedContainer(
+            width: _width,
+            height: _height,
+            color: _color,
+            duration: Duration(seconds: 1),
+            curve: Curves.easeInOut,
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _changeBox,
+          child: Icon(Icons.play_arrow),
+        ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.centerFloat,
+      ),
+    );
+  }
+}
